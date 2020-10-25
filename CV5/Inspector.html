@@ -22,6 +22,11 @@
 <pre id=disp1></pre> <img id=disp2 />
 
 <h4>* Add code to show that each Entry has exactly one of these: 'work' and 'weekend'</h4>
+<hr />
+<b>counter</b>
+<pre id=sample>0</pre>
+
+<hr />
 <textarea id="data" name="w3review" rows="22" cols="25"></textarea>
 <button onclick="q1()">QUESTION 1</button>
 
@@ -77,13 +82,16 @@ function init() {
     }
 function q1()
 {
+  let counter = 0;
     for (let x of JOURNAL){
       for (let y of x.events){
         if (y.includes("work") || y.includes("weekend")){
          document.getElementById("data").value +=x.events+'\n';
+         counter++;
         }
       }
     }
+  sample.innerText = counter.toString()
 }
 </script>
 </body>

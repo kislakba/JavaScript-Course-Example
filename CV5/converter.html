@@ -43,12 +43,12 @@
 "use strict";
 // JavaScript comment
 function LengthConvertercm(valNum) {
-  let num = new Lenght(valNum);
+  let num = new Length(valNum);
   document.getElementById("inputInches").value =num.inch.toFixed(1);
 }function LengthConverterinch(valNum) {
-  var num = Lenght.fromInch(valNum).cm;
+  var num = Length.fromInch(valNum).cm;
   document.getElementById("inputcm").value =num.toFixed(1);
-}class Lenght {
+}class Length {
   constructor(cm) {
     this.cm = cm;
   }
@@ -59,12 +59,12 @@ function LengthConvertercm(valNum) {
     this.celsius = value / 0.39370;
   }
   static fromInch(value) {
-    return new Lenght((value / 0.39370));
+    return new Length((value / 0.39370));
   }
 }
     //global variable id is the HTML element with id 
     //const title = document.getElementById("title");
-    sample.innerText = LengthConvertercm.toString() + LengthConverterinch.toString() +  Lenght.toString();
+    sample.innerText = LengthConvertercm.toString() + LengthConverterinch.toString() +  Length.toString();
 </script>
 </body>
 </html>
