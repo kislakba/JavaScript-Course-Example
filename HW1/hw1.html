@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Make a Table </title>
+
+    <style>
+        body {
+            max-width: 440px;
+        }
+        #sample {
+            overflow-x: auto;
+            font-size: 14px;
+            font-weight: bold;
+            width: 200%;
+        }
+        hr{
+            width: 125%;
+        }
+        table {
+            border-collapse: collapse;
+        }
+        th {
+            color: orchid;
+            padding: 7px 7px;
+            font-weight: bold;
+            text-align: center;
+        }
+        td {
+            border: 2px solid blueviolet;
+            padding: 20px 20px;
+            text-align: center;
+            position: relative;
+        }
+        td:hover .tip {
+            visibility: visible;
+        }
+        td .tip {
+            visibility: hidden;
+            font-size: small;
+            background-color: royalblue;
+            color: white;
+            text-align: center;
+            padding: 5px 5px;
+            position: absolute;
+            left: 5px;
+            top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <center>
+        <h2 id=title></h2>
+
+
+        <table id="table"></table>
+
+
+        <form oninput="tableFromInput()">
+
+        </form>
+    </center>
+
+    <hr />
+    <b>Sample code</b>
+    <pre id=sample></pre>
+    <hr />
+
+    <script>
+        "use strict";
+        function makeRows() {
+            const L = [0.5, 1, 1.5, 2, 2.5, 3]
+            let p = []
+            for (let λ of L)  p.push(Math.exp(-λ).toFixed(4))
+            let row = "<th></th>";
+            for (let j = 0; j < L.length; j++) 
+                row += "<th>" + "λ = " +L[j] + "</th>";
+            let text = "<tr>" + row + "</tr>";
+            for (let x = 0; x <= 8; x++) {
+                row = "<th>" + "X=" + x + "</th>";
+                if (x != 0) {
+                    for (let i = 0; i < p.length; i++) {
+                        p[i] = ((p[i] * L[i]) / x).toFixed(4)
+                    }
+                }
+                for (let i of p) {
+                    let s = "<span class=tip> Value="+i+"</span>"
+                    row += "<td>" + i + s +"</td>";
+                }
+                text += "<tr>" + row + "</tr>";
+            }
+            let t = text.length + " chars";
+            table.innerHTML = text; out.innerText = t;
+        }
+        title.innerText = document.title;
+        sample.innerText = makeRows.toString();
+        makeRows();
+    </script>
+
+</body>
+
+</html>
