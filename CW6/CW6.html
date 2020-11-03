@@ -38,18 +38,17 @@
 "use strict";
 // JavaScript comment
 function check() {
-  fetch(url.value).then(r=>
-    resp.innerText=r.ok
-  ).catch(e=>resp.innerText=e)
+  fetch(url.value).then( r =>
+    resp.innerText="OK"
+  ).catch(e => resp.innerText="Failed")
 }
 function init() {
-plat.innerText = navigator.platform;
-navigator.geolocation.getCurrentPosition(p =>
-  loc.innerText= p.coords.latitude.toFixed(4) + 
-                  ", " + p.coords.longitude.toFixed(4)
-)
+  plat.innerText = navigator.platform;
+  navigator.geolocation.getCurrentPosition(p =>
+    loc.innerText = p.coords.latitude.toFixed(4) + ", " + p.coords.longitude.toFixed(4)
+  )
 navigator.getBattery().then(b =>
-  level.innerText = (b.level * 100).toFixed(0)+"%" 
+  level.innerText = (b.level * 100).toFixed(0) + "%" 
 )
   check()
 }
