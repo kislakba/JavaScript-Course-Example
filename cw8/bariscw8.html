@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en-US"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <link rel="icon" href="https://blm-fsmvu.github.io/305/images/icon192.png">
+    <title>Remote and Local Files </title>
+    <style>
+        body { max-width: 500px; }
+        #remote { width: 90%; }
+    </style>
+</head>
+
+<body>
+<p><b id="docName">Remote and Local Files</b> &nbsp; <a href="https://blm-fsmvu.github.io/305/work/Reading_files">Reference</a>
+</p>
+<p>Remote file <br>
+  <input type="text" id="remote" size="35" value="../images/objects.png">
+</p>
+<p><input type="file" id="local" multiple="" onchange="fileSelect()"></p>  
+<pre id="out"></pre>
+<hr>
+<b>Sample code</b>
+<pre id="sample">function fileSelect() {<br>    fetch(remote.value).then(r =&gt; r.blob())<br>    .then(checkFiles) //called with Blob b<br>}<br>function checkFiles(b) {<br>    let a = [...local.files]<br>    //Implement this<br>    out.innerText += 'Implement this '<br>}</pre>
+
+<script>
+"use strict";
+function fileSelect() {
+    fetch(remote.value).then(r => r.blob())
+    .then(checkFiles) //called with Blob b
+}
+function checkFiles(b) {
+    out.innerText = '';
+    let a = [...local.files]
+    let sizeOfSelectedFiles = 0;
+    let sameFiles = '';
+    let selectedFilesNames = '';
+    console.log(b);
+    console.log(a);
+    a.forEach(element => {
+        sizeOfSelectedFiles++;
+        selectedFilesNames += element.name + '  ';
+        if(b.size == element.size && b.type == element.type){
+            sameFiles += element.name +', ';
+        }
+    });
+    out.innerText += 'Remote File : ' + remote.value +'\n';
+    out.innerText += 'Choose Files : '+ sizeOfSelectedFiles + ' Files \n';
+    out.innerText += selectedFilesNames +'\n';
+    console.log(sizeOfSelectedFiles);
+    console.log(sameFiles);
+    if(sameFiles == ''){
+        out.innerText += 'Result: ' + sizeOfSelectedFiles + ' items checked';
+        out.innerText += ', all files are different'
+    }else{
+        out.innerText += 'Result: ' + sizeOfSelectedFiles + ' items checked, ';
+        out.innerText += sameFiles + 'are/is the same as ' + remote.value;
+    }
+}
+const L = console.log
+docName.innerText = document.title
+sample.innerText = fileSelect+"\n"+checkFiles
+</script>
+
+
+</body></html>
