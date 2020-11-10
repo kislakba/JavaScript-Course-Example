@@ -35,8 +35,6 @@ function checkFiles(b) {
     let sizeOfSelectedFiles = 0;
     let sameFiles = '';
     let selectedFilesNames = '';
-    console.log(b);
-    console.log(a);
     a.forEach(element => {
         sizeOfSelectedFiles++;
         selectedFilesNames += element.name + '  ';
@@ -47,8 +45,6 @@ function checkFiles(b) {
     out.innerText += 'Remote File : ' + remote.value +'\n';
     out.innerText += 'Choose Files : '+ sizeOfSelectedFiles + ' Files \n';
     out.innerText += selectedFilesNames +'\n';
-    console.log(sizeOfSelectedFiles);
-    console.log(sameFiles);
     if(sameFiles == ''){
         out.innerText += 'Result: ' + sizeOfSelectedFiles + ' items checked';
         out.innerText += ', all files are different'
