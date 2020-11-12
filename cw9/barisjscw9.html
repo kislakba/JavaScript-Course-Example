@@ -20,6 +20,7 @@ const BOOK_REF =
         let tab = elt("h2", TITLE);
         let inputArea = elt("input", 0);
         inputArea.setAttribute('type',"number");
+        inputArea.setAttribute('value',0);
         inputArea.setAttribute('onchange',"out.innerText=value");
         let buttonPlus = elt("button", "+");
         buttonPlus.setAttribute('type',"button");
