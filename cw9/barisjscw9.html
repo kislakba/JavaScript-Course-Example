@@ -27,9 +27,13 @@ const BOOK_REF =
         let out = elt("p",0);
         out.setAttribute('id',"out")
         let line = elt("br", "-");
-        let ref = elt("a", "JS Tutorial")
-        let footer = elt("p", "REF: ", BOOK_REF);
-        document.body = elt("body", tab, inputArea, buttonPlus,out, line, ref,footer)
+        let refLink = elt("a","JS Tutorial");
+        refLink.setAttribute('href',BOOK_REF);
+        let ref = elt("p", "Ref : ", refLink);
+        let sampleCode = elt('b',"Sample Code");
+        let pre  = elt("pre", makePage);
+        document.body = elt("body", tab, inputArea, 
+                buttonPlus,out,elt("div",sampleCode,pre), line, ref)
 
     }
 
