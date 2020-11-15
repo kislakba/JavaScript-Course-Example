@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <script type="text/javascript" src="database.js"></script>
+    <style media="screen">
+      .a {
+        padding-top: 5px;
+      }
+    </style>
+  </head>
+  <body>
+
+      <h1>Student and Course Database</h1>
+      
+        Student ID:
+        <input type=text   id=stu_key style="width:99px">
+        <br> <br>
+        <input type=button value="Search" onClick="search()">
+        <input type=button value="Get courses of the student" onClick="getStuCourses()">
+        <input type=button value="Get schedule of the student" onClick="getStudentSchedule()">
+
+        <p id="DisplayStu"></p>
+        <p id="StuCourses"></p>
+        <p id="StuSchedule"></p>
+        
+        <br> ******************************************************************** <br>
+      
+        <input type=button value="Random Room" onClick="randomRoom()">
+        <input type=button value="Random Student" onClick="random()">
+        <p id="RandomRoom"></p>
+        <p id="RandomStu"></p>
+        
+        <br> ******************************************************************** <br>
+      
+        GPA:
+        <input type=number   id=gpa_key style="width:99px">
+        <input type=button value="Number of students above a given GPA " onClick="numberGPA()">
+        <p id="GPA"></p>
+        <br> ******************************************************************** <br>
+        
+        Course Name (Code):
+        <input type= text id=course_key style="width:99px">
+        <input type=button value="Get the Student List" onClick="stuListOfCourse()">
+        <p id="StuList"></p>
+         
+        <br> ******************************************************************** <br>
+      
+        Room Code:
+        <input type= text id=room_key style="width:99px">
+        <br><br>
+        <input type=button value="Course list of this exam room" onClick="courseListofRoom()">
+        <input type=button value="Total course number of the Room " onClick="crsNumbrOfRoom()">
+        <p id="crsList"></p>
+        <p id="numberRoom"></p>
+      
+  </body>
+</html>
