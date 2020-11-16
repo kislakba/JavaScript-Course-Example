@@ -69,7 +69,9 @@
         <button id="totalNumber" onClick='courseNumberOfRoom(roomId.value)'>Total Number</button>
         <p id="courseList"></p>
         <p id="courseNumber"></p>
-
+<hr>
+        <button id="mapandkey" onClick='searchInArrayAndMap()'>Search In Map and Array</button>
+        <p id="resultSecond"></p>
 
 
 <hr>
@@ -253,7 +255,8 @@ function courseListofRoom (roomId) {
     var counter = 0;
     courseList.innerHTML = " "
     for(let c of crsMap.values()) {
-      if(c.list.includes(roomId)){
+      if(c.list.includes(roomId)){    let tMap1 = performance.now();
+
         counter++;
         console.log(c);
         courseList.innerHTML+= c.id + "\t" + c.time + "\t" + c.date + "</br>";
@@ -272,6 +275,38 @@ function courseNumberOfRoom (courseId) {
     }
     courseNumber.innerHTML = "Total course number : " + counter + "</br>";
   }
+
+function searchInArrayAndMap(){
+    let keys = [...stdMap.keys()];
+    let randomNumber = [];
+    for (let step = 0; step < 10000; step++) {
+        randomNumber.push(Math.random().toString().slice(2,11));
+    }
+    console.log(randomNumber);
+    console.log(keys);
+    console.log(stdMap);
+    let counterArray = 0;
+    let counterMap = 0;
+    let tArray1= performance.now();
+    for (let step = 0; step < randomNumber.length; step++) {
+        if(keys.includes(randomNumber[step])){
+            counterArray++;
+        }
+    }
+    let tArray2 = performance.now();
+    let tMap1 = performance.now();
+    for (let step = 0; step < randomNumber.length; step++) {
+        if(stdMap.has(randomNumber[step])){
+            counterMap++;
+        }
+    }
+    let tMap2 = performance.now();
+    console.log(counterArray + " and " + counterMap);
+    resultSecond.innerHTML = "Result for Map search is : " + counterMap +
+            "<br> Result for Array Seach is : " + counterArray + 
+            "<br> time for search in the map : " + (tMap2-tMap1) + " ms" +
+            "<br> time for search in the array :" + (tArray2-tArray1) + " ms";
+}
   
 const LINK = "https://maeyler.github.io/JS/data/"
 function readStudents() {
@@ -283,7 +318,7 @@ function readCourses() {
     .then(t => makeData(t,Course,crsMap))
 }
 title.innerText = document.title
-sample.innerText = Course+"\n"+readCourses+"\n"+getStudentSchedule+getClosestExam+"\n"+stuListOfCourse+courseListofRoom+"\n"+courseNumberOfRoom
+sample.innerText = Course+"\n"+readCourses+"\n"+getStudentSchedule+getClosestExam+"\n"+stuListOfCourse+courseListofRoom+"\n"+courseNumberOfRoom+"\n"+searchInArrayAndMap
 readStudents(); readCourses();
 </script>
 
