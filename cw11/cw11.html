@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width">
+  <link rel="icon" href="https://blm-fsmvu.github.io/305/images/icon192.png">
+  <title>ClassWork 11 </title>
+
+  <style>
+    /* CSS comment */
+    body {
+      max-width: 440px;
+    }
+
+    #url {
+      width: 190px;
+    }
+
+    span,
+    #url {
+      color: blue;
+    }
+
+    .batteryOuter {
+      height: 200px;
+      width: 50px;
+      background-color: white;
+      border: solid 3px black;
+      display: block;
+      position: relative;
+    }
+
+    .batteryInner {
+      width: 50px;
+      height: 5px;
+      background: #008000;
+      transition: height 0.2s ease;
+      display: block;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- HTML comment: Modify all items marked xxx -->
+
+  <h2 id="title" title="Modify xxx">Class Work 11</h2>
+  <p title="navigator.platform">
+
+  <p title="Battery level">
+    Battery level: %<span id="level" onchange="batteryInit()">??</span>
+  </p>
+  <p title="Charging Status">
+    Charging Status: <span id="charge">??</span>
+
+  </p>
+  <p title="Charging Time">
+    Charging Time: <span id="chargeMinute">??</span>
+
+  </p>
+
+  <div class="batteryOuter">
+    <div class="batteryInner" id="battery"></div>
+  </div>
+  <hr>
+
+  <p title="Status">
+    Current Status : <span id="statusListener">??</span>
+
+  </p>
+  <hr>
+  <hr>
+
+  <p title="Keyboard Listener">
+    Keyboard Listener : <span id="keyboardListener">??</span>
+
+  </p>
+  <hr>
+
+
+  <b>Sample code</b>
+  <pre
+    id="sample">function init() {<br>    plat.innerText = navigator.platform<br>    navigator.geolocation.getCurrentPosition(p =&gt; <br>      loc.innerText = p.coords.latitude.toFixed(4)<br>                +', '+p.coords.longitude.toFixed(4)<br>    )<br>    navigator.getBattery().then(b =&gt; <br>      level.innerText = 100*b.level+'%'<br>    )<br>    check()<br>}<br>function check() {<br>    fetch(url.value).then(r =&gt; <br>      resp.innerText = r.ok? 'OK' : 'Not found'<br>    ).catch(e =&gt; resp.innerText = e)<br>}</pre>
+
+  <hr>
+
+  <script>
+    "use strict";
+    function init() {
+
+      navigator.getBattery().then(b => {
+        level.innerText = (b.level * 100)
+        b.onchargingchange = () => charge.innerText = 
+                        (b.charging ? "Charging..." : "Discharging...")
+        charge.innerText = (b.charging ? "Charging..." : "Discharging...")
+        initRemaining(b.dischargingTime);
+        batteryInit()
+      }
+      )
+      window.addEventListener("keydown", event => {
+        keyboardListener.innerText = event.key
+      });
+
+      window.addEventListener("keyup", event => {
+        keyboardListener.innerText = event.key
+      });
+
+      if (navigator.onLine) {
+        statusListener.innerText = "You are online and connected";
+      } else {
+        statusListener.innerText = "You are ofline :/ and disconnected";
+      }
+      window.addEventListener('online', e => {
+        statusListener.innerText = "You are online and connected";
+      }, false);
+
+      window.addEventListener('offline', e => {
+        statusListener.innerText = "You are ofline :/ and disconnected";
+      }, false);
+    }
+    function initRemaining(a) {
+      if (a == Infinity) {
+        chargeMinute.innerText = "Still Calculating... //only works on discharging"
+      } else {
+        var hrs = ~~(a / 3600);
+        var mins = ~~((a % 3600) / 60);
+        var ret = "";
+        if (hrs > 0) {
+          ret += "" + hrs + ":" + (mins < 10 ? "0" : "");
+        }
+        ret += "" + mins;
+        chargeMinute.innerText = ret + " hours left";
+      }
+    }
+    function batteryInit() {
+
+      var batteryInner = document.getElementsByClassName('batteryInner')[0];
+      batteryInner.style.height = level.innerText + '%';
+      if (parseInt(level.innerText) < 15) {
+        batteryInner.style.background = "#FF0000";
+      } else if ((level.innerText) > 15 && (level.innerText) < 75) {
+        batteryInner.style.background = "	#FFFF00";
+      } else {
+        batteryInner.style.background = "	#008000"
+      }
+    }
+    title.innerText = document.title;
+    sample.innerText = init.toString() + initRemaining + batteryInit;
+    init();
+    batteryInit();
+  </script>
+
+
+
+</body>
+
+</html>
