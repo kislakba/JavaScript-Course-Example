@@ -2,7 +2,7 @@
     "name": "Baris Kislak",
     "description": "Advanced Programming Classworks",
     "short_name": "Javascript_Course",
-    "start_url": "/JavaScript-Course-Example/index.html",
+    "start_url": "index.html",
     "display": "standalone",
     "background_color": "white",
     "theme_color": "#457cdb",
