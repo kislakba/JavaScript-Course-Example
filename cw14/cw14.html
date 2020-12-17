@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width">
     <link rel="icon" href="../images/icon192.png">
-    <title>Open Weather</title>
+    <title>OpenStreetMap with Weather API</title>
     <style>
         body {
             margin: 0;
@@ -189,31 +189,7 @@
             if (!r.ok) error(r.statusText)
             return r.json()
         }
-        // Location
-        var lat, lon;  //global values
-        /*async function askLocation() {
-            let name = 'geolocation'
-            let result = await navigator.permissions.query({ name })
-            if (result.state == 'denied') {
-                let url = "https://ipinfo.io/json"
-                toJSON(url).then(getLocation2, error)
-            } else {
-                navigator.geolocation
-                    .getCurrentPosition(getLocation1, error);
-            }
-        }
-        function getLocation2(p) { //Approximate
-            console.log("ipinfo.io", p.city)
-            let [x, y] = p.loc.split(',')
-            lat = Number(x); lon = Number(y);
-            askWeather()
-        }
-        function getLocation1(p) { //Accurate
-            console.log("getCurrentPosition")
-            lat = p.coords.latitude; lon = p.coords.longitude;
-            askWeather()
-        }*/
-        // Weather
+        var lat, lon; 
         var accessKey;
         async function askWeather() {
             console.log(lat, lon);
@@ -224,20 +200,7 @@
             hava.innerText = "getting weather"
             detay.innerText = ''
             gunes.innerText = ''
-            /* replace this code by fetch()
-            let xhttp = new XMLHttpRequest()
-            xhttp.responseType = "text"
-            xhttp.onreadystatechange = () => {
-               if (xhttp.readyState == 4 && xhttp.status == 200) 
-                  showWeather(JSON.parse(xhttp.responseText))
-               else hava.innerText = "XX"
-            }
-            xhttp.open("GET", url, true); xhttp.send()
-            */
             let data = await toJSON(url)
-            //  fetch(url).then(r => r.json()).then(showWeather)
-            // }
-            // function showWeather(data) {
             let w = data.weather[0]; showIcon(w.icon)
             let celsius = convert(data.main.temp).toFixed(0)
             let hh = w.main + "  " + celsius + "°", { sys } = data
@@ -247,7 +210,7 @@
             lat = data.coord.lat; lon = data.coord.lon
             let loc = "[" + lat.toFixed(2) + ", " + lon.toFixed(2) + "]"
             detay.innerText = hh + '\n' + yy + '\n' + loc
-                + '\nWind  ' + (data.wind.speed * 3.6) + ' km/h'
+                + '\nWind  ' + (data.wind.speed * 3.6).toFixed(2) + ' km/h'
                 + '\nWind Degree: ' + data.wind.deg + '°'
                 + '\nPressure ' + data.main.pressure + ' hpa'
                 + '\nHumidity ' + data.main.humidity + '%'
@@ -271,9 +234,8 @@
             return k
         }
         function error(e) {
-            main.style.display = "none"; //hide
-            //refs.style.display = "none";
-            err.style.display = ''; //show
+            main.style.display = "none"; 
+            err.style.display = ''; 
             throw e
         }
         function getAPIkey() {
@@ -290,7 +252,7 @@
             }
         }
         err.style.display = "none"
-        getAPIkey(); init(); askWeather();      //askLocation()
+        getAPIkey(); init(); askWeather();
     </script>
 
 </body>
