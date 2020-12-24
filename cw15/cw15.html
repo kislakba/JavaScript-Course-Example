@@ -80,7 +80,6 @@
     function error(e) {
       if (e.result) { error(e.result); return }
       if (e.error) { error(e.error); return }
-      console.error(e); out.style.color = 'red'
       out.innerText = stringify(e)
     }
     async function authenticate() {
