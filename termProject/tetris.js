@@ -215,7 +215,21 @@ function rotateMatrix(matrix, dir) {
         matrix.reverse();
     }
 }
+function playerLand() {
 
+    while (!collide(arena, player)) {
+        player.pos.y++;
+    }
+    if (collide(arena, player)) {
+        player.pos.y--;
+        merge(arena, player);
+        player.pos.y = 0;
+        playerReset();
+        arenaSweep();
+        scoreUpdate();
+    }
+    dropCounter = 0;
+}
 function playerDown() {
     player.pos.y++;
     if (collide(arena, player)) {
@@ -282,7 +296,7 @@ document.addEventListener('keydown', event => {
             playerRightLeft(-1);
             break;
         case 'ArrowDown':
-            playerDown();
+            playerLand();
             break;
         case 'ArrowUp':
             tetrisoidRotate();
@@ -315,7 +329,7 @@ swiper.onLeft(function () {
 swiper.onRight(function () {
     playerRightLeft(+1);
 });
-swiper.onDown(function () { playerDown(); });
+swiper.onDown(function () { playerLand(); });
 swiper.onUp(function () { tetrisoidRotate(); });
 swiper.run();
 const arena = createMatrix(12, 20);
