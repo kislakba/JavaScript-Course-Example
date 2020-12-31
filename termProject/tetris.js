@@ -333,7 +333,19 @@ swiper.onDown(function () { playerLand(); });
 swiper.onUp(function () { tetrisoidRotate(); });
 swiper.run();
 const arena = createMatrix(12, 20);
+function startTheGame() {
+    document.getElementById("intro").style.display = "none";
+    document.getElementById("intro1").style.display = "none";
+    document.getElementById("intro2").style.display = "none";
+    document.getElementById("intro3").style.display = "none";
+    document.getElementById("intro4").style.display = "none";
+    document.getElementById("intro0").style.display = "none";
+    document.getElementById("button").style.display = "none";
 
-playerReset()
-scoreUpdate();
-update();
+    document.getElementById("tetris").style.display = "inline";
+
+    playerReset()
+    scoreUpdate();
+    update();
+
+}

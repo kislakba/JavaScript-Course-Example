@@ -19,12 +19,22 @@
     canvas {
       border: solid .2em #fff;
       height: 90vh;
+      display: none;
     }
   </style>
 </head>
 
 <body>
   <div id="score"></div>
+
+  <h3 id="intro"> Welcome To Tetris Game</h3>
+  <p id="intro0">USER MANUAL</p>
+  <p id="intro1">Move Tetrosoid Left : Left Arrow / Swipe Left</p>
+  <p id="intro2">Move Tetrosoid Right : Right Arrow / Swipe Right</p>
+  <p id="intro3">Land the Tetrosoid : Down Arrow / Swipe Down</p>
+  <p id="intro4">Rotate Tetrosoid : Up Arrow  / Swipe Up</p>
+
+  <input type="button" id="button" onclick="startTheGame()" value="Start The Game" />
   <canvas id="tetris" width="240" height="400"></canvas>
   <script src="tetris.js"></script>
 </body>
